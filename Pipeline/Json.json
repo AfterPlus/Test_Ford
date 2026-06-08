@@ -1,0 +1,74 @@
+[
+    {
+        "name": "CarSeat_FINAL",
+        "parent": null,
+        "is_mesh": false,
+        "material": "M_Default"
+    },
+    {
+        "name": "CarSeat_FINALShape",
+        "parent": "CarSeat_FINAL",
+        "is_mesh": false,
+        "material": "M_Default"
+    },
+    {
+        "name": "SeatbaseFBXASC0383840_baseFBXASC0611",
+        "parent": "CarSeat_FINAL",
+        "is_mesh": true,
+        "material": "blinn1"
+    },
+    {
+        "name": "SeatbaseFBXASC0383840_baseFBXASC0611Shape",
+        "parent": "SeatbaseFBXASC0383840_baseFBXASC0611",
+        "is_mesh": false,
+        "material": "M_Default"
+    },
+    {
+        "name": "carpetFBXASC045087t2831FBXASC045FBXASC038FBXASC038FBXASC042FBXASC036FBXASC094_the",
+        "parent": "CarSeat_FINAL",
+        "is_mesh": false,
+        "material": "M_Default"
+    },
+    {
+        "name": "carpetFBXASC045087t2831FBXASC045FBXASC038FBXASC038FBXASC042FBXASC036FBXASC094_theShape",
+        "parent": "carpetFBXASC045087t2831FBXASC045FBXASC038FBXASC038FBXASC042FBXASC036FBXASC094_the",
+        "is_mesh": false,
+        "material": "M_Default"
+    },
+    {
+        "name": "lowFBXASC032polyFBXASC032top_FINAL",
+        "parent": "CarSeat_FINAL",
+        "is_mesh": true,
+        "material": "blinn1"
+    },
+    {
+        "name": "lowFBXASC032polyFBXASC032top_FINALShape",
+        "parent": "lowFBXASC032polyFBXASC032top_FINAL",
+        "is_mesh": false,
+        "material": "M_Default"
+    },
+    {
+        "name": "seatFBXASC032bottomFBXASC032basemeshFBXASC046007_threads_fin",
+        "parent": "CarSeat_FINAL",
+        "is_mesh": true,
+        "material": "blinn1"
+    },
+    {
+        "name": "seatFBXASC032bottomFBXASC032basemeshFBXASC046007_threads_finShape",
+        "parent": "seatFBXASC032bottomFBXASC032basemeshFBXASC046007_threads_fin",
+        "is_mesh": false,
+        "material": "M_Default"
+    },
+    {
+        "name": "seatFBXASC046018FBXASC06432_metal_final__final",
+        "parent": "CarSeat_FINAL",
+        "is_mesh": true,
+        "material": "blinn1"
+    },
+    {
+        "name": "seatFBXASC046018FBXASC06432_metal_final__finalShape",
+        "parent": "seatFBXASC046018FBXASC06432_metal_final__final",
+        "is_mesh": false,
+        "material": "M_Default"
+    }
+]
