@@ -2,12 +2,8 @@ import json
 import unreal
 
 def execute_unreal_hierarchy_builder(json_path, fbx_folder="/Game/ImportedMeshes"):
-    """
-    Parses structural data JSON, matches assets using the Asset Registry,
-    spawns true StaticMeshActors, and links them hierarchically.
-    Material logic has been completely removed.
-    """
-    # 1. Read sanitized JSON payload
+    " TODO : Material logic not working  "
+    # Read the Json file r is set at the bottom of the code
     with open(json_path, 'r') as f:
         scene_data = json.load(f)
 
@@ -15,14 +11,14 @@ def execute_unreal_hierarchy_builder(json_path, fbx_folder="/Game/ImportedMeshes
     editor_actor_subs = unreal.get_editor_subsystem(unreal.EditorActorSubsystem)
     asset_registry = unreal.AssetRegistryHelpers.get_asset_registry()
 
-    # Pre-cache all Static Meshes inside your import folder to guarantee precise name matching
+    # Filter the data and get only static mesh from the folder
     filter_data = unreal.ARFilter(package_paths=[fbx_folder], class_names=["StaticMesh"], recursive_paths=True)
     available_mesh_assets = asset_registry.get_assets(filter_data)
 
-    # Create a quick-lookup map matching lowercase asset names to their absolute paths
+    # Quick lool up for mesh
     mesh_path_map = {str(asset.asset_name).lower(): asset.get_asset() for asset in available_mesh_assets}
 
-    # 2. First Pass: Spawn elements based on structural types
+    # Loop the Json 
     for item in scene_data:
         name = item['name']
         is_mesh = item['is_mesh']
@@ -30,25 +26,22 @@ def execute_unreal_hierarchy_builder(json_path, fbx_folder="/Game/ImportedMeshes
         lookup_key = name.lower()
         actor = None
 
+        # TODO : We actually don't need to spawn 
         if is_mesh and lookup_key in mesh_path_map:
-            # Successfully found the actual Static Mesh asset data
             mesh_asset = mesh_path_map[lookup_key]
 
-            # Spawn a dedicated StaticMeshActor to preserve the model component structure
             actor = editor_actor_subs.spawn_actor_from_class(unreal.StaticMeshActor, unreal.Vector(0, 0, 0))
             actor.static_mesh_component.set_static_mesh(mesh_asset)
         else:
-            # Fallback path if the node is structural (Null/Group) or if asset registry lookup failed
             if is_mesh:
                 unreal.log_warning(f"Mesh named '{name}' not found in folder. Spawning as an empty grouping transform instead.")
 
-            # Spawn structural null groups/locators as empty actors
             actor = editor_actor_subs.spawn_actor_from_class(unreal.Actor, unreal.Vector(0, 0, 0))
 
         actor.set_actor_label(name)
         actor_registry[name] = actor
 
-    # 3. Second Pass: Reconstruct accurate hierarchy bindings
+    # Reconstruct accurate hierarchy bindings
     for item in scene_data:
         name = item['name']
         parent_name = item['parent']
